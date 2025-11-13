@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citizen Login/Register</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <h1>Citizen Portal</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="citizen_login.html" class="active">Citizen Portal</a>
+            <a href="admin_login.html">Admin</a>
+        </nav>
+    </header>
+
+    <main class="container form-container">
+        <h2>Citizen Access</h2>
+        
+        <form id="loginForm" class="form-card active">
+            <h3>Login</h3>
+            <div class="form-group">
+                <label for="loginEmail">Email:</label>
+                <input type="email" id="loginEmail" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="loginPassword">Password:</label>
+                <input type="password" id="loginPassword" name="password" required>
+            </div>
+            <button type="submit" class="btn primary">Login</button>
+            <p class="switch-text">Don't have an account? <a href="#" onclick="toggleForm('registerForm')">Register here</a></p>
+        </form>
+
+        <form id="registerForm" class="form-card hidden">
+            <h3>Register</h3>
+            <div class="form-group">
+                <label for="regName">Full Name:</label>
+                <input type="text" id="regName" name="fullName" required>
+            </div>
+            <div class="form-group">
+                <label for="regEmail">Email:</label>
+                <input type="email" id="regEmail" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="regPassword">Password:</label>
+                <input type="password" id="regPassword" name="password" required>
+            </div>
+            <button type="submit" class="btn primary">Register</button>
+            <p class="switch-text">Already have an account? <a href="#" onclick="toggleForm('loginForm')">Login here</a></p>
+        </form>
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        // Simple client-side form toggling (implementation in script.js)
+        document.getElementById('loginForm').onsubmit = (e) => {
+            e.preventDefault();
+            alert('Login attempted! (Redirecting to complaint submission...)');
+            window.location.href = 'citizen_submit_complaint.html';
+        };
+        document.getElementById('registerForm').onsubmit = (e) => {
+            e.preventDefault();
+            alert('Registration successful! (Please log in)');
+            toggleForm('loginForm');
+        };
+    </script>
+</body>
+</html>

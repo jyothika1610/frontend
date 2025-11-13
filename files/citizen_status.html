@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint Status</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <h1>Complaint Status</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="citizen_submit_complaint.html">Submit</a>
+            <a href="citizen_status.html" class="active">Status</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h2>Your Submitted Complaints</h2>
+        
+        <div class="search-bar">
+            <input type="text" id="searchComplaintId" placeholder="Enter Complaint ID (e.g., C-1001)">
+            <button class="btn secondary" onclick="searchComplaint()">Search</button>
+        </div>
+
+        <div class="table-container">
+            <table id="complaintStatusTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Category</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="citizenComplaintList">
+                    <tr>
+                        <td>C-1003</td>
+                        <td>Potholes on Main Street</td>
+                        <td>Road</td>
+                        <td>2025-11-10</td>
+                        <td><span class="status resolved">Resolved</span></td>
+                    </tr>
+                    <tr>
+                        <td>C-1002</td>
+                        <td>Broken Streetlight near School</td>
+                        <td>Streetlight</td>
+                        <td>2025-11-08</td>
+                        <td><span class="status in-progress">In-Progress</span></td>
+                    </tr>
+                    <tr>
+                        <td>C-1001</td>
+                        <td>Garbage Pile Up on Corner</td>
+                        <td>Garbage</td>
+                        <td>2025-11-05</td>
+                        <td><span class="status pending">Pending</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p id="noComplaintsMessage" class="hidden">No complaints found.</p>
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        // Placeholder function for searching complaint
+        function searchComplaint() {
+            const id = document.getElementById('searchComplaintId').value.trim();
+            if (id) {
+                alert(`Searching for Complaint ID: ${id}... (Displaying static list)`);
+            }
+        }
+    </script>
+</body>
+</html>

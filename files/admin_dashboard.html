@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <h1>Admin Dashboard</h1>
+        <nav>
+            <a href="admin_dashboard.html" class="active">Dashboard</a>
+            <a href="admin_login.html" onclick="alert('Logging out...')">Logout</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h2>Complaint Overview</h2>
+
+        <section class="dashboard-cards">
+            <div class="card status pending">
+                <h3>Total Pending</h3>
+                <p id="pendingCount">10</p>
+            </div>
+            <div class="card status in-progress">
+                <h3>Total In-Progress</h3>
+                <p id="inProgressCount">5</p>
+            </div>
+            <div class="card status resolved">
+                <h3>Total Resolved</h3>
+                <p id="resolvedCount">85</p>
+            </div>
+            <div class="card total">
+                <h3>Total Complaints</h3>
+                <p id="totalCount">100</p>
+            </div>
+        </section>
+        
+        <hr>
+
+        <h2>Complaint List</h2>
+        
+        <div class="table-container">
+            <table id="adminComplaintTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Category</th>
+                        <th>Submit Date</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="adminComplaintList">
+                    <tr data-id="1004" data-category="Drainage" data-description="Blocked drain causing flooding near the market." data-photo="drain_issue.jpg">
+                        <td>C-1004</td>
+                        <td>Blocked Market Drain</td>
+                        <td>Drainage</td>
+                        <td>2025-11-11</td>
+                        <td><span class="status pending">Pending</span></td>
+                        <td>
+                            <select onchange="updateStatus('C-1004', this.value)">
+                                <option value="Pending" selected>Pending</option>
+                                <option value="In-Progress">In-Progress</option>
+                                <option value="Resolved">Resolved</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr data-id="1002" data-category="Streetlight" data-description="Light broken, dark path near the bus stop." data-photo="light_issue.jpg">
+                        <td>C-1002</td>
+                        <td>Broken Streetlight near School</td>
+                        <td>Streetlight</td>
+                        <td>2025-11-08</td>
+                        <td><span class="status in-progress">In-Progress</span></td>
+                        <td>
+                            <select onchange="updateStatus('C-1002', this.value)">
+                                <option value="Pending">Pending</option>
+                                <option value="In-Progress" selected>In-Progress</option>
+                                <option value="Resolved">Resolved</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr data-id="1003" data-category="Road" data-description="Large potholes making driving difficult." data-photo="road_issue.jpg">
+                        <td>C-1003</td>
+                        <td>Potholes on Main Street</td>
+                        <td>Road</td>
+                        <td>2025-11-10</td>
+                        <td><span class="status resolved">Resolved</span></td>
+                        <td>
+                            <select onchange="updateStatus('C-1003', this.value)">
+                                <option value="Pending">Pending</option>
+                                <option value="In-Progress">In-Progress</option>
+                                <option value="Resolved" selected>Resolved</option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="detailsModal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close-btn" onclick="closeModal()">&times;</span>
+                <h3>Complaint Details</h3>
+                <p><strong>ID:</strong> <span id="modalId"></span></p>
+                <p><strong>Category:</strong> <span id="modalCategory"></span></p>
+                <p><strong>Description:</strong> <span id="modalDescription"></span></p>
+                <p><strong>Photo:</strong> <a id="modalPhotoLink" href="#" target="_blank">View Photo</a></p>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        // Simple DOM manipulation for viewing details
+        document.getElementById('adminComplaintList').addEventListener('click', (e) => {
+            const row = e.target.closest('tr');
+            if (row && e.target.tagName !== 'SELECT') {
+                document.getElementById('modalId').textContent = row.querySelector('td:nth-child(1)').textContent;
+                document.getElementById('modalCategory').textContent = row.dataset.category;
+                document.getElementById('modalDescription').textContent = row.dataset.description;
+                document.getElementById('modalPhotoLink').href = row.dataset.photo;
+                document.getElementById('detailsModal').classList.remove('hidden');
+            }
+        });
+
+        function closeModal() {
+            document.getElementById('detailsModal').classList.add('hidden');
+        }
+
+        function updateStatus(id, newStatus) {
+            alert(`Complaint ${id} status updated to: ${newStatus}`);
+            // In a real application, you'd send an API request here
+            // Update the span color
+            const row = document.querySelector(`tr[data-id="${id.split('-')[1]}"]`);
+            const statusSpan = row.querySelector('.status');
+            
+            statusSpan.className = `status ${newStatus.toLowerCase().replace('-', '')}`;
+            statusSpan.textContent = newStatus;
+        }
+    </script>
+</body>
+</html>

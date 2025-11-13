@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <h1>Admin Portal</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="citizen_login.html">Citizen Portal</a>
+            <a href="admin_login.html" class="active">Admin</a>
+        </nav>
+    </header>
+
+    <main class="container form-container">
+        <h2>Admin Access</h2>
+        <form id="adminLoginForm" class="form-card">
+            <h3>Admin Login</h3>
+            <div class="form-group">
+                <label for="adminEmail">Username/Email:</label>
+                <input type="text" id="adminEmail" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="adminPassword">Password:</label>
+                <input type="password" id="adminPassword" name="password" required>
+            </div>
+            <button type="submit" class="btn primary">Login</button>
+        </form>
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        document.getElementById('adminLoginForm').onsubmit = (e) => {
+            e.preventDefault();
+            // Simple check (admin/password)
+            const email = document.getElementById('adminEmail').value;
+            const password = document.getElementById('adminPassword').value;
+            
+            if (email === 'admin' && password === 'password') {
+                alert('Admin Login Successful!');
+                window.location.href = 'admin_dashboard.html';
+            } else {
+                alert('Invalid Credentials. Try admin/password.');
+            }
+        };
+    </script>
+</body>
+</html>

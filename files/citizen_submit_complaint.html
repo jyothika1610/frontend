@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit New Complaint</title>
+    <meta http-equiv="Content-Security-Policy" 
+      content="default-src 'self'; 
+               connect-src 'self' http://localhost:8070 http://127.0.0.1:5500; 
+               script-src 'self'; 
+               style-src 'self' 'unsafe-inline';">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <h1>Submit Complaint</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="citizen_login.html">Login/Register</a>
+            <a href="citizen_submit_complaint.html" class="active">Submit</a>
+            <a href="citizen_status.html">Status</a>
+            <button id="logout-button" onclick="logout()" style="margin-left: 15px;">Logout</button>
+        </nav>
+    </header>
+
+    <main class="container form-container">
+        <h2>File a New Grievance</h2>
+        <form id="complaintForm" class="form-card">
+            <div class="form-group">
+                <label for="complaintTitle">Title:</label>
+                <input type="text" id="complaintTitle" name="title" required>
+            </div>
+
+            <div class="form-group">
+                <label for="complaintCategory">Category:</label>
+                <select id="complaintCategory" name="category" required>
+                    <option value="">-- Select Category --</option>
+                    <option value="Road">Road</option>
+                    <option value="Streetlight">Streetlight</option>
+                    <option value="Drainage">Drainage</option>
+                    <option value="Garbage">Garbage</option>
+                    <option value="Water Supply">Water Supply</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="complaintAddress">Address/Location:</label>
+                <input type="text" id="complaintAddress" name="location" required>
+            </div>
+
+            <div class="form-group">
+                <label for="complaintDescription">Description:</label>
+                <textarea id="complaintDescription" name="description" rows="5" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="complaintPhoto">Upload Photo (Optional):</label>
+                <input type="file" id="complaintPhoto" name="image" accept="image/*">
+            </div>
+
+            <button type="submit" class="btn primary">Submit Complaint</button>
+        </form>
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        document.getElementById('complaintForm').onsubmit = (e) => {
+            e.preventDefault();
+            alert('Complaint submitted successfully!');
+            window.location.href = '/citizen_status.html';
+        };
+        
+        function logout() {
+            alert('Logged out successfully!');
+            window.location.href = 'citizen_login.html';
+        }
+    </script>
+    </body>
+</html>
